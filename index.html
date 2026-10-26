@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isa Lai – Interactive systems, sensing, and ML</title>
+<meta name="description" content="Isa Lai, graduate researcher at Northwestern's VAK Embodied Systems Lab. Wearable sensing, indoor localization, and AI tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8e7dc;--ink:#12202F;--muted:#51606F;--line:#C9D3DC;--accent:#1F4FD8;--tag:#DCE5F0;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1620;--ink:#E6EDF4;--muted:#9AA9B8;--line:#26343F;--accent:#7AA2FF;--tag:#1A2733;--card:#142030}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 "IBM Plex Sans",system-ui,sans-serif}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15;margin:0}
+.w{max-width:1050px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .w{display:flex;justify-content:space-between;align-items:center;gap:16px;height:56px}
+header b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover{border-color:var(--accent)}
+.hero{padding:72px 0 40px;display:grid;grid-template-columns:1fr 240px;gap:48px;align-items:center}
+.me{width:300px;height:400px;object-fit:cover}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.02em;max-width:18ch}
+.hero p{max-width:64ch;margin:20px 0 0}
+.hero .sub{color:var(--muted)}
+section{padding:48px 0;scroll-margin-top:56px}
+h2{font-size:1.9rem;margin-bottom:24px}
+h3{font-size:1.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.card .im{display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;cursor:pointer;background:#fff}
+.im img{width:100%;height:100%;display:block}
+.im.noimg{background:var(--tag)}
+.cb{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cb h3 button{all:unset;cursor:pointer}
+.cb h3 button:hover{color:var(--accent)}
+.cb h3 button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.cb p{margin:0;font-size:.97rem;color:var(--muted)}
+.meta{font-size:.875rem;color:var(--muted)}
+.tags{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.tags li{background:var(--tag);padding:1px 10px;border-radius:99px;font-size:.8rem}
+.news{display:flex;gap:20px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--ink);margin-bottom:12px}
+.news:hover h3{color:var(--accent)}
+.news img{width:220px;aspect-ratio:16/9;object-fit:cover;flex:none;background:var(--tag)}
+.news div{padding:12px 16px 12px 0}
+.news p{margin:4px 0 0;font-size:.95rem;color:var(--muted)}
+@media (max-width:640px){.news{flex-direction:column;align-items:stretch}.news img{width:100%}.news div{padding:0 16px 14px}}
+.job{margin:0 0 28px;max-width:70ch}
+.job h3{font-size:1.1rem}
+.job ul{margin:8px 0 0;padding-left:20px}
+.edu{display:flex;gap:16px;align-items:flex-start}
+.logo{width:80px;height:80px;object-fit:contain;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.cols h3{margin-bottom:6px}
+.cols p{margin:0}
+.sub3{font-size:1.4rem;margin:40px 0 20px}
+footer{padding:32px 0 64px;color:var(--muted);border-top:1px solid var(--line)}
+dialog{width:min(780px,94vw);max-height:90vh;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(8,14,22,.6)}
+.dh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+.dh h2{font-size:1.5rem;margin:0}
+.dh button{font:inherit;cursor:pointer;background:var(--tag);color:var(--ink);border:0;border-radius:6px;padding:6px 12px}
+.db{padding:16px 24px 28px}
+.db video,.db iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:6px;background:#0B141D;margin-bottom:12px}
+.db h4{margin:18px 0 4px;font-size:1rem}
+.db p,.db ul{margin:0 0 8px}
+.db ul{padding-left:20px}
+@media (max-width:640px){nav{gap:12px;font-size:.95rem}header b{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="w"><b>Isa Lai</b>
+<nav aria-label="Page"><a href="#projects">Projects</a><a href="#experience">Experience</a>
+  <!-- <a href="#skills">Skills</a> -->
+  <a href="#contact">Contact me</a></nav></div></header>
+
+<main class="w">
+<div class="hero">
+  <div>
+    <h1>I build interactive systems that solve problems around us.</h1>
+    <p>I’m Yung-ching (Isa), a Graduate Researcher in the <a href="https://embodiedsystem.com/">VAK Embodied Systems Lab</a> at Northwestern University. I work on ubiquitous computing and human-computer interaction: problems where software has to meet sensors, people, and messy real-world data.</p>
+    <p>My projects span the stack. I’ve built low-power sensing hardware and signal-processing pipelines for smart glasses, a Wi-Fi indoor positioning system with a live web interface, and a retrieval-augmented chatbot that helps people without lawyers navigate court. I like turning a research idea into something that runs, is measured, and that people can use.</p>
+    <p class="sub">Open to <strong>software engineering / ML engineering</strong> roles starting <strong>Jan 2027</strong>.</p>
+  </div>
+  <img class="me" src="img/me.jpg" alt="Portrait of Isa Lai" onerror="this.style.display='none'">
+</div>
+
+<section id="news" style="padding-top:8px"><h2>In the news</h2>
+  <a class="news" href="https://news.northwestern.edu/stories/2026/10/blink-powered-glasses-could-keep-an-eye-on-health?utm_source=newsletter&utm_medium=email&utm_campaign=wearable-technology">
+    <img src="img/publicity.jpeg" alt="" loading="lazy">
+    <div><div class="meta">Northwestern NOW · OCT 2026</div>
+    <h3>Blink-powered glasses could keep an eye on health</h3>
+    <p>New smart glasses harvest mechanical energy from facial movements to power sensors</p></div>
+  </a>
+</section>
+
+<section id="projects"><h2>Projects</h2><div class="grid" id="grid"></div></section>
+
+<section id="experience"><h2>Experience</h2>
+  <div class="job"><h3>Graduate Researcher, VAK Embodied Systems Lab</h3>
+  <div class="meta">Northwestern University · Nov 2025 – Present</div>
+  <ul><li>Co-first author of GlassTENG (Ubicomp/ISWC 2026 & UIST demo 2026): self-powered based sensing of pulse, jaw, and facial activity from everyday glasses.</li>
+  <!-- <li>[Add: what you built or owned, e.g. data pipeline, classifier, firmware, user study.]</li> -->
+  </ul></div>
+  <div class="job"><h3>Teaching Assistant, Mobile and Ubiquitous Computing</h3>
+  <div class="meta">Northwestern University · Sep 2026 - Dec 2026</div>
+  <ul><li>35 students: led [discussion sections / office hours], graded [assignments / projects], and wrote [problem sets / autograder tests].</li>
+  <li>[Add: a result, e.g. course rating, redesigned assignment, students mentored on projects.]</li></ul></div>
+  <div class="job"><h3>Research Intern, Bioinformatics Lab</h3>
+  <div class="meta">Institute of Information Science, Academia Sinica, Taiwan · Jul 2023 - Dec 2024 · PI: Dr. Huai-Kuang Tsai</div>
+  <ul><li>Adapted a Faster R-CNN model to locate eccDNA within DNA sequences and benchmarked it on eccDNA, G4-DNA, R-loop, and triplex-DNA data. Traced a flat training loss to a poor architecture fit and moved on to a better-suited question.</li>
+  <li>Converted variable-length sequences into 16×16 FCGR matrices to train a CNN copy-number-variation classifier (0.8 accuracy), then tested whether eccDNA behaves like CNV (0.52 accuracy, so no strong link).</li>
+  <li>Worked independently for most of the project: planned experiments, taught myself new methods, and reported negative results.</li></ul></div>
+  <div class="job"><h3>Teaching Assistant, Computer System Laboratory Course</h3>
+  <div class="meta">National Taiwan University (NTU) · Feb 2024 - Jun 2024</div>
+  <ul><li>60 students: [what you taught, graded, or built for the course].</li></ul></div>
+
+  <!-- <h3 class="sub3">Education</h3>
+  <div class="job"><h3>Northwestern University</h3><div class="meta">MS in Computer Science · [2025 – 2026] · [GPA: 3.9]</div>
+  <div class="job"><h3>National Taiwan University</h3><div class="meta">BS in Computer Science and Information Engineering · [2021 – 2025] · [GPA: 3.8]</div></div> -->
+
+  <h3 class="sub3">Education</h3>
+  <div class="job edu"><img class="logo" src="img/NU.webp" alt="" onerror="this.remove()"><div><h3>Northwestern University</h3><div class="meta">MS in Computer Science · 2025 – 2026 · GPA: 3.9</div></div></div>
+  <div class="job edu"><img class="logo" src="img/NTU.png" alt="" onerror="this.remove()"><div><h3>National Taiwan University</h3><div class="meta">BS in Computer Science and Information Engineering · 2021 – 2025 · GPA: 3.8</div></div></div>
+
+</section>
+
+<!-- <section id="skills"><h2>Skills</h2><div class="cols">
+  <div><h3>Languages</h3><p>Python, [C / C++], [JavaScript], [SQL]</p></div>
+  <div><h3>ML and data</h3><p>scikit-learn, Random Forests, CNNs, Faster R-CNN, cross-validation, signal processing, feature engineering, RAG with LLMs</p></div>
+  <div><h3>Systems and hardware</h3><p>ESP32 firmware, analog front-end circuits, sensor fabrication, Wi-Fi RSSI sensing</p></div>
+  <div><h3>Web and tools</h3><p>Flask, [React], [Git], [Docker]</p></div>
+</div></section> -->
+
+<section id="contact"><h2>Contact me</h2>
+  <p>Email <a href="mailto:isalay1003@gmail.com">isalay1003@gmail.com</a></p>
+  <p><a href="resume.pdf">Resume (PDF)</a> · 
+    <!-- <a href="https://github.com/YOUR-USERNAME">GitHub</a> ·  -->
+    <a href="https://www.linkedin.com/in/yung-ching-lai-7987872a0">LinkedIn</a></p>
+</section>
+</main>
+<footer><div class="w">© 2026 Yung0ching (Isa) Lai</div></footer>
+
+<dialog id="dlg" aria-labelledby="dt"><div class="dh"><div><h2 id="dt"></h2><div class="meta" id="dm"></div></div><button id="x" type="button">Close</button></div><div class="db" id="db"></div></dialog>
+
+<script>
+const P=[
+{id:"glassteng",title:"GlassTENG",meta:"ISWC 2026 · VAK Embodied Systems Lab",img:"img/glassteng.jpg",
+ sum:"Self-powered sensors in everyday glasses that read pulse, jaw, and facial activity on a few microwatts.",
+ media:`<video controls preload="metadata" playsinline src="video/GlassTENG_teaser.mp4"></video>`,
+ tags:["Embedded","Signal processing","Random Forest","User study"],
+ body:`<p>Smart glasses touch the skin at several arteries and muscles, but sensors that draw milliwatts need big batteries. GlassTENG puts three flexible triboelectric nanogenerator (TENG) sensors in a glasses frame. They turn pulse and muscle movement directly into voltage, so only the signal-conditioning circuit draws power.</p>
+ <h4>What it does</h4><ul><li>Reads arterial pulse from the nasal bridge and both temple sites.</li><li>Recognizes jaw and upper-face activity: clenching, tapping, eating, talking, blinking, and eyebrow raises.</li><li>Analog front-end uses 1.36 µW per channel (4.1 µW for all three), orders of magnitude below optical PPG or EMG front-ends.</li></ul>
+ <h4>How it works</h4><ul><li>Custom PDMS/FEP sensors with silver electrodes; high-impedance unity-gain amplifier on a custom PCB; ESP32-C6 logging at 100 Hz.</li><li>Bandpass filtering, per-participant normalization, windowed features, and a Random Forest evaluated with leave-one-subject-out cross-validation.</li></ul>
+ <h4>Results</h4><ul><li>20-participant study: 93.8% accuracy across the activity classes.</li><li>Heart rate within 1.82 BPM mean absolute error of a Polar H10 chest strap (30-second windows, 10 participants).</li></ul>
+ <h4>My role</h4><p>Co-first author. [Describe your contributions: e.g. signal-processing pipeline, classifier, study design, firmware.]</p>
+ <p><a href="https://news.northwestern.edu/stories/2026/10/blink-powered-glasses-could-keep-an-eye-on-health?utm_source=newsletter&utm_medium=email&utm_campaign=wearable-technology">University news article</a> · <a href="https://dl.acm.org/doi/abs/10.1145/3830727.3834817">Read the paper</a></p>`},
+{id:"mycourtpal",title:"MyCourtPal",meta:"Course project with CARPLS Justice Intel Program",img:"img/mycourtpal.png",
+ sum:"A chatbot that guides people without lawyers through Cook County divorce court, grounded in real courthouse knowledge.",
+ media:`<video controls preload="metadata" playsinline src="video/mycourtpal.mp4"></video>`,
+ tags:["LLM","RAG","Python","Web app"],
+ body:`<p>For people without lawyers, the hardest part of court is often finding their way through the system: where to go, what to bring, and how a specific judge runs a courtroom. MyCourtPal answers these questions in plain language for people handling a divorce in the Domestic Relations Division of the Daley Center.</p>
+ <h4>What it does</h4><ul><li>Users ask questions or upload court papers, such as a summons. The bot explains what the document is and what to do next, including deadlines, forms, and fee waivers.</li><li>It gives judge-specific tips and links to existing legal-aid resources. It states clearly that it provides information, not legal advice.</li><li>An Update tab collects courtgoer and staff observations. Partners vet them before they enter the database.</li></ul>
+ <h4>How it works</h4><ul><li>A large language model with retrieval-augmented generation (RAG). It searches the user’s uploaded file and a curated courthouse database, then generates an answer grounded in those documents.</li><li>Content comes from on-site observation and interviews with Daley Center staff.</li></ul>
+ <h4>Team</h4><p>Law students, a Master of Studies in Law student, and a computer science master’s student, in partnership with CARPLS.</p>
+ <h4>My role</h4><p>[Describe your contributions: e.g. retrieval pipeline, document upload, frontend, evaluation.]</p>
+ <p><a href="https://github.com/YOUR-USERNAME/mycourtpal">Code</a></p>`},
+{id:"localization",title:"Indoor localization with Wi-Fi",meta:"Course project · Northwestern",img:"img/localization.png",
+ sum:"Zone-level indoor positioning from Wi-Fi signal fingerprints, running on a standard laptop with a live floor-plan map.",
+ media:`<video controls preload="metadata" playsinline src="video/localization.mp4"></video>`,
+ tags:["Python","scikit-learn","Flask","Wi-Fi sensing"],
+ body:`<p>GPS fails indoors, and beacon or UWB systems need new infrastructure. This project uses the Wi-Fi access points already in a building. Each location has a distinct pattern of signal strengths (an RSSI fingerprint), shaped by reflections off walls and floors.</p>
+ <h4>How it works</h4><ul><li>Scans Wi-Fi on Windows (WLAN API through ctypes) and macOS (command-line scanner) with no extra hardware.</li><li>Collected about 100 samples per zone across seven zones on one floor, keeping four campus networks.</li><li>Random Forest with a grid search over hyperparameters and 5-fold stratified cross-validation.</li><li>Live inference scans every 2 seconds and gates predictions by confidence (below 50% shows “Unknown”). The displayed zone changes only after two consecutive predictions agree.</li><li>A Flask server and browser UI highlight the current zone on an annotated floor plan.</li></ul>
+ <h4>Results</h4><ul><li>368 samples from 108 access points; 99.5% cross-validated accuracy. This is within a single building, at zone level.</li></ul>
+ <h4>Limits and next steps</h4><p>Recent macOS and iOS versions restrict raw signal access. Future work: drift detection when access points move, IMU fusion for finer position, and larger buildings.</p>
+ <h4>My role</h4><p>[Describe your contributions.] Team of four.</p>
+ <p><a href="https://github.com/YOUR-USERNAME/indoor-localization">Code</a></p>`},
+{id:"eccdna",title:"eccDNA detection and classification",meta:"Academia Sinica · Summer 2023",img:"img/eccdna.svg",
+ sum:"Two-month research internship: locating eccDNA with Faster R-CNN and testing its link to copy number variation using FCGR images.",
+ media:`<svg viewBox="0 0 200 90" width="100%" role="img" aria-label="Circular DNA ring" style="margin-bottom:12px"><circle cx="100" cy="45" r="34" fill="none" stroke="var(--accent)" stroke-width="6"/><circle cx="100" cy="45" r="23" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 5"/><circle cx="134" cy="45" r="5" fill="var(--ink)"/></svg>`,
+ tags:["Python","CNN","Faster R-CNN","FCGR"],
+ body:`<p>Extrachromosomal circular DNA (eccDNA) is DNA that forms rings outside the chromosomes. At the Institute of Information Science, Academia Sinica, I worked on two machine-learning questions. The lab already had a CNN that tells whether a sequence contains eccDNA, at about 0.8 accuracy.</p>
+ <h4>1. Where is the eccDNA in a sequence?</h4><ul><li>Adapted Faster R-CNN to sequences: a region proposal network finds candidate regions, then a Fast R-CNN head refines their boundaries and labels.</li><li>Trained on eccDNA and on other DNA structures (G4-DNA, R-loop, triplex DNA) and scored with average precision (AP).</li><li>Results: AP 0.12 for eccDNA, 0.4 for R-loop, below 0.1 for the rest.</li><li>Training loss stayed flat, and early and late checkpoints scored about the same. I concluded the model was not learning and that the architecture was a poor fit, then changed direction.</li></ul>
+ <h4>2. Is eccDNA related to copy number variation (CNV)?</h4><ul><li>CNNs need fixed-length input, and filtering CNV data to under 1,000 bp left too little to train on.</li><li>Fix: turn every sequence into a 16×16 Frequency Chaos Game Representation (FCGR) matrix. This handles any length and can be viewed as an image.</li><li>The CNV classifier reached 0.8 accuracy. On eccDNA it scored 0.52, and about 0.5 after retraining on shorter CNV and testing on longer eccDNA, which ruled out length mismatch.</li><li>Conclusion: eccDNA and CNV are probably not as closely related as assumed.</li></ul>
+ <h4>Follow-up</h4><p>Further FCGR experiments: models split by cell and tissue type and by length range, plus cross-species prediction. [Add results.]</p>
+ <h4>Takeaways</h4><p>I worked mostly alone, so I learned to diagnose a stalled training run, reshape data to fit a model’s constraints, and report a negative result clearly.</p>`},
+{id:"privacy",title:"Privacy-aware wearable",meta:"Course project",img:"img/IRglass.jpg",
+ sum:"A wearable that detects infrared cameras nearby and interferes with facial recognition to protect the wearer.",
+ media:`<video controls preload="metadata" playsinline src="video/IRglass.mp4"></video>`,
+ tags:["Wearables","Privacy","Hardware"],
+ body:`<p>[Course, term.] This wearable system detects infrared cameras and disrupts facial recognition.</p>
+ <h4>What I built</h4><ul><li>[Sensing: how it detects IR cameras.]</li><li>[Interference: what it does to face recognition and how you tested it.]</li><li>[Result or demo.]</li></ul>`}
+];
+const g=document.getElementById("grid"),d=document.getElementById("dlg"),db=document.getElementById("db");
+P.forEach(p=>{
+ const a=document.createElement("article");a.className="card";
+ const im=p.img?`<img src="${p.img}" alt="${p.title}" loading="lazy" style="object-fit:contain" onerror="this.parentNode.classList.add('noimg');this.remove()">`:"";
+ a.innerHTML=`<button class="im${p.img?"":" noimg"}" type="button" data-id="${p.id}" aria-label="Open details: ${p.title}">${im}</button>
+ <div class="cb"><h3><button type="button" data-id="${p.id}">${p.title}</button></h3><div class="meta">${p.meta}</div><p>${p.sum}</p>
+ <ul class="tags">${p.tags.map(t=>`<li>${t}</li>`).join("")}</ul></div>`;
+ g.appendChild(a);
+});
+g.addEventListener("click",e=>{
+ const b=e.target.closest("button[data-id]");if(!b)return;
+ const p=P.find(x=>x.id===b.dataset.id);
+ document.getElementById("dt").textContent=p.title;document.getElementById("dm").textContent=p.meta;
+ db.innerHTML=p.media+p.body;d.showModal();d.scrollTop=0;
+});
+function closeD(){d.close();db.innerHTML=""}
+document.getElementById("x").onclick=closeD;
+d.addEventListener("click",e=>{if(e.target===d)closeD()});
+d.addEventListener("close",()=>{db.innerHTML=""});
+</script>
+</body>
+</html>
